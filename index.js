@@ -54,12 +54,12 @@
    const defaultPropsKeys = Object.keys(defaultProps);
  
    return (user) => {
-     const userDefaults = fromEntries(defaultPropsKeys
+     const userDefaultProps = fromEntries(defaultPropsKeys
        .map((defaultPropsKey) => {
          return !(defaultPropsKey in user) && [defaultPropsKey, defaultProps[defaultPropsKey]];
        })
        .filter(Boolean));
-     return { ...userDefaults, ...user };
+     return { ...userDefaultProps, ...user };
    };
  };
  
