@@ -5,7 +5,7 @@
  */
  exports.example = () => 'hello world';
 
-function fromEntries(entries) {
+function fromEntries<T>(entries: [keyof T, T[keyof T]][]): T {
   if (!entries || !entries[Symbol.iterator]) {
     throw new Error('fromEntries() requires a single iterable argument');
   }
@@ -13,14 +13,14 @@ function fromEntries(entries) {
   return Object.assign({}, ...entries.map(([key, val]) => ({ [key]: val })));
 }
 
-function omit(obj, propsToFilter = []) {
+function omit<T extends object, K extends [(keyof T)[]]>(obj: T, propsToFilter: K) {
   const filtered = Object.entries(obj)
     .filter(([key]) => !propsToFilter.includes(key));
 
   return fromEntries(filtered);
 }
 
-exports.stripPrivateProperties = (fields, users) => users.map(user => omit(user, fields));
+exports.stripPrivateProperties = (fields: string[], users: any[]) => users.map(user => omit(user, fields));
 
 exports.excludeByProperty = (field, users) => users.filter(user => !(field in user));
 

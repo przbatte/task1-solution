@@ -1,6 +1,10 @@
 module.exports = {
-  testPathIgnorePatterns: ["/__helpers__/"],
+  preset: 'ts-jest',
+  testPathIgnorePatterns: ['/__helpers__/', '<rootDir>/node_modules/'],
   globals: {
-    TEST_LOCATION: process.env.TEST_LOCATION || "../index.js"
-  }
+    TEST_LOCATION: process.env.TEST_LOCATION || '../index',
+    'ts-jest': {
+      diagnostics: true,
+    },
+  },
 };
